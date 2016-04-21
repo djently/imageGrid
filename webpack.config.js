@@ -1,7 +1,9 @@
+/*eslint-env node */
 const path = require('path'),
       merge = require('webpack-merge'),
       webpack = require('webpack'),
       HtmlWebpackPlugin = require('html-webpack-plugin'),
+      CopyWebpackPlugin = require('copy-webpack-plugin'),
       htmlConfig = require(path.resolve('./app/mainpage.json'));
 
 const TARGET = process.env.npm_lifecycle_event || 'build';
@@ -18,6 +20,10 @@ const common = {
     module: {
         loaders: [
             {
+                test: /\.css$/,
+                loaders: ['style', 'css'],
+            },
+            {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
                 loader: 'babel',
@@ -29,7 +35,14 @@ const common = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin(htmlConfig)
+        new HtmlWebpackPlugin(htmlConfig),
+        new CopyWebpackPlugin([
+            {
+                context: path.join(__dirname, 'app/components'),
+                from: {glob: '**/*.html'},
+                to: path.join(__dirname, 'build/templates')
+            }
+        ])
     ]
 };
 
@@ -37,7 +50,8 @@ if (TARGET === 'start') {
     module.exports = merge(common, {
         devServer: {
             contentBase: path.resolve('./build/'),
-            hot: true
+            hot: true,
+            outputPath: path.resolve('./build/')
         },
         devtool: 'eval-source-map'
     })

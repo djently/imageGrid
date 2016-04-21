@@ -1,7 +1,0 @@
-{
-  "envs": {
-    "browser": true,
-    "commonjs": true
-  },
-  "extends": "defaults/configurations/airbnb/es6"
-}
