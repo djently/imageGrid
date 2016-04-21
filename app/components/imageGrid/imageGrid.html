@@ -1,9 +1,16 @@
 <section class="ig-grid">
     <h2>Images Grid</h2>
-    <img ng-src="{{ img.url }}"
-         alt="{{ img.name }}" 
-         ng-repeat="img in imageGrid.images track by img.url"
-         ng-click="imageGrid.removeImage(img)"
-         class="ig-grid--image" 
-    >
+    <div class="ig-grid-container">
+        <img ng-src="{{ img.url }}"
+             alt="{{ img.name }}" 
+             ng-repeat="img in imageGrid.images track by img.url"
+             ng-click="imageGrid.removeImage(img)"
+             class="ig-grid-container--image"
+
+             grid-image
+             columns="3"
+             width="300"
+             index="{{$index}}"
+        >
+    </div>
 </section>

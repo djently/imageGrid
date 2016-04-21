@@ -1,18 +1,17 @@
-function imageGridController(ImagesService) {
-    var self = this;
+class ImageGridController {
+    constructor(ImagesService) {
+        this.images = [];
 
-    self.images = [];
-    self.removeImage = removeImage;
+        ImagesService.getImages(1, 50).then((images) => {
+            this.images = this.images.concat(images);
+        })
+    }
 
-    ImagesService.getImages(1, 50).then(function(images) {
-        self.images = self.images.concat(images);
-    })
-
-    function removeImage(img) {
-        self.images.splice(self.images.indexOf(img), 1);
+    removeImage(img) {
+        this.images.splice(this.images.indexOf(img), 1);
     }
 }
 
-imageGridController.$inject = ['ImagesService'];
+ImageGridController.$inject = ['ImagesService'];
 
-export default imageGridController;
+export default ImageGridController;
