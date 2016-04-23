@@ -1,0 +1,10 @@
+.grid-image {
+    -webkit-transition: opacity .3s ease;
+    transition: opacity .3s ease;
+    opacity: 0;
+    min-height: 185px;
+}
+
+.grid-image--loaded {
+    opacity: 1;
+}
