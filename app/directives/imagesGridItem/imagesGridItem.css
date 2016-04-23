@@ -1,0 +1,10 @@
+.igi-item {
+    box-sizing: border-box;
+    width: 100%;
+    opacity: 0;
+    transition: all .3s ease;
+}
+
+.igi-item--loaded {
+    opacity: 1;
+}
