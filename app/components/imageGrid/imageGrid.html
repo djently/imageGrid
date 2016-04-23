@@ -6,9 +6,11 @@
              ng-repeat="img in imageGrid.images track by img.url"
              ng-click="imageGrid.removeImage(img)"
              class="ig-grid-container--image"
-
              grid-image
-             width="300"
         >
+    </div>
+
+    <div class="ig-grid--counter">
+        {{ imageGrid.images.length }} images loaded
     </div>
 </section>

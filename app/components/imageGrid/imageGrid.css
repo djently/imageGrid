@@ -10,14 +10,24 @@
     0 1px 5px 0 rgba(0,0,0,.12);
 }
 
+.ig-grid--counter {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    height: 30px;
+}
+
 .ig-grid-container {
-    box-sizing: border-box;
-    width: 100%;
-    position: relative;
+    column-count: 5; /* will be overriden by directive */
+    column-fill: auto;
+    text-align: center;
 }
 
 .ig-grid-container--image
 {
+    display: inline-block;
     width: 300px;
+    padding: 10px;
     height: auto;
 }
