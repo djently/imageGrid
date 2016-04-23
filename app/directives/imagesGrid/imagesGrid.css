@@ -1,0 +1,10 @@
+.ig-column {
+    box-sizing: border-box;
+    display: block;
+    float: left;
+}
+
+.ig-column-image {
+    box-sizing: border-box;
+    width: 100%;
+}

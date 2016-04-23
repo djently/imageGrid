@@ -1,24 +1,22 @@
-<md-content class="ig-grid" md-whiteframe="3">
-    <header class="ig-grid-header md-headline">Images Grid</header>
+<md-content class="ip-main" md-whiteframe="3">
+    <header class="ip-header md-headline">Images Grid</header>
 
-    <div class="ig-grid-container" ng-show="grid.images.length > 0">
+    <div class="ip-container" ng-show="grid.images.length > 0">
         <img ng-src="{{ img.url }}"
              alt="{{ img.name }}" 
              ng-repeat="img in grid.images track by img.url"
              ng-click="grid.removeImage(img)"
-             class="ig-grid-container--image"
-             grid-image
         >
     </div>
 
     <div layout="column" layout-align="center center"
-        class="ig-grid-spinner"
+        class="ip-spinner"
         ng-show="grid.showSpinner"
     >
         <md-progress-circular md-diameter="96"></md-progress-circular>
     </div>
 
-    <div class="ig-grid-counter">
+    <div class="ip-counter">
         {{ grid.images.length }} images on grid
     </div>
 </md-content>

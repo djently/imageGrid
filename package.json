@@ -32,6 +32,7 @@
     "angular-messages": "^1.5.5",
     "jquery": "^2.2.3",
     "lodash.debounce": "^4.0.6",
+    "lodash.range": "^3.1.4",
     "normalize.css": "^4.1.1"
   },
   "eslintConfig": {

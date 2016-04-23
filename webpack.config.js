@@ -53,6 +53,11 @@ const common = {
                 context: path.join(__dirname, 'app/components'),
                 from: {glob: '**/*.html'},
                 to: path.join(__dirname, 'build/templates')
+            },
+            {
+                context: path.join(__dirname, 'app/directives'),
+                from: {glob: '**/*.html'},
+                to: path.join(__dirname, 'build/templates')
             }
         ]),
         new webpack.optimize.CommonsChunkPlugin({
@@ -71,7 +76,7 @@ if (TARGET === 'start') {
             hot: true,
             outputPath: path.resolve('./build/')
         },
-        devtool: 'eval-source-map'
+        devtool: 'source-map'
     })
 }
 

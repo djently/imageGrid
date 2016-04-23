@@ -1,0 +1,14 @@
+<div ng-repeat="column in ig.columns track by $index" 
+     class="ig-column"
+     ng-style="{ width: ig.columnWidth }"
+    >
+    <img 
+        ng-repeat="image in column track by image.url" 
+        class="ig-column-image"
+        ng-src="{{ image.url }}"
+        alt="{{ image.name }}"
+        ng-if="column.length > 0"
+        ng-style="{ padding: ig.padding + 'px' }"
+        ng-click="ig.removeImage(image, $event)"
+    />
+</div>

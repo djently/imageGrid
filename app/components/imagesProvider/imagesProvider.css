@@ -1,0 +1,42 @@
+.ip-main
+{
+    position: relative;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+
+    background: #fff;
+}
+
+.ip-header
+{
+    margin-bottom: 20px;
+}
+
+.ip-counter
+{
+    font-size: 1.1em;
+    line-height: 60px;
+
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+
+    box-sizing: border-box;
+    width: calc(100% - 40px);
+    height: 60px;
+    padding: 0 20px;
+
+    vertical-align: middle;
+
+    color: #fff;
+    background: rgba(51, 51, 51, .75);
+}
+
+.ip-container
+{
+    width: 100%;
+    margin-bottom: 60px;
+}

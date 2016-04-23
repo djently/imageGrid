@@ -1,0 +1,18 @@
+<md-content class="ip-main" md-whiteframe="3">
+    <header class="ip-header md-headline">Images Grid</header>
+
+    <div class="ip-container" ng-show="ip.images.length > 0">
+        <images-grid width="300" padding="10" images="ip.images"></images-grid>
+    </div>
+
+    <div layout="column" layout-align="center center"
+        class="ip-spinner"
+        ng-show="ip.showSpinner"
+    >
+        <md-progress-circular md-diameter="96" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div class="ip-counter">
+        {{ ip.images.length }} images on grid
+    </div>
+</md-content>
