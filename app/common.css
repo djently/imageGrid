@@ -3,10 +3,12 @@ body
 {
     font-family: 'Open Sans', sans-serif;
 
+    color: rgba(0, 0, 0, .87);
     background-color: #fafafa;
 }
 
 body
 {
+    box-sizing: border-box;
     padding: 20px;
 }

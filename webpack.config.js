@@ -9,10 +9,18 @@ const path = require('path'),
 const TARGET = process.env.npm_lifecycle_event || 'build';
 
 const common = {
-    entry: path.resolve('./app/index.js'),
+    entry: {
+        vendors: [
+            'angular-material',
+            'angular-material/angular-material.css'
+        ],
+        app: [
+            path.resolve('./app/')
+        ]
+    },
     output: {
         path: path.resolve('./build'),
-        filename: 'bundle.[hash].js'
+        filename: '[name].[hash].js'
     },
     resolve: {
         extensions: ['', '.js']
@@ -31,6 +39,10 @@ const common = {
                     presets: ['es2015'],
                     cacheDirectory: '.cache'
                 }
+            },
+            {
+                test: /\.html$/,
+                loader: 'raw'
             }
         ]
     },
@@ -42,7 +54,13 @@ const common = {
                 from: {glob: '**/*.html'},
                 to: path.join(__dirname, 'build/templates')
             }
-        ])
+        ]),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendors',
+            filename: 'vendors.[hash].js',
+            chunks: ['vendors']
+        }),
+        new webpack.optimize.OccurenceOrderPlugin()
     ]
 };
 

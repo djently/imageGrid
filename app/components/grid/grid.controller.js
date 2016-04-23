@@ -5,17 +5,23 @@ class ImageGridController {
     constructor($element, $timeout, ImagesService) {
         this.$element = $element;
         this.images = [];
+        this.showSpinner = true;
 
         ImagesService.getImages(1, 50).then((images) => {
-            this.images = this.images.concat(images);
+            this.images = this.images.concat(
+                images.map((image) => {
+                    return Object.assign(image, {
+                        loading: true,
+                        loaded: false
+                    });
+                })
+            );
+
             $timeout(() => {
                 this.setGridColumns();
-            }, 0, false);
+                this.showSpinner = false;
+            }, 0);
         });
-    }
-
-    removeImage(img) {
-        this.images.splice(this.images.indexOf(img), 1);
     }
 
     $onInit() {
@@ -25,6 +31,10 @@ class ImageGridController {
                 100, {trailing: true}
             )
         );
+    }
+
+    removeImage(img) {
+        this.images.splice(this.images.indexOf(img), 1);
     }
 
     setGridColumns() {
@@ -40,6 +50,10 @@ class ImageGridController {
 
         $element.find('.ig-grid-container')
             .css('column-count', Math.floor(containerWidth / imageWidth));
+    }
+
+    countImageOnGrid() {
+        return 
     }
 }
 
