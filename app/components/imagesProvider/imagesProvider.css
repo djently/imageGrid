@@ -37,6 +37,16 @@
 
 .ip-container
 {
+    overflow: auto;
+    zoom: 1;
+
     width: 100%;
+    height: calc(100% - 112px); /*header height + bottom margin*/
     margin-bottom: 60px;
+}
+
+images-grid {
+    display: block;
+    overflow: auto;
+    zoom: 1;
 }

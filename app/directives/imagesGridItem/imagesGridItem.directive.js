@@ -20,5 +20,9 @@ export default imagesGridItemDirective;
 function imagesGridItemPrelink(scope, element) {
     const $img = $(element).children();
 
-    $img.on('load', () => $img.addClass('igi-item--loaded'));
+    $img.on('load', () => {
+        $img.addClass('igi-item--loaded');
+        scope.image.loaded = true;
+        scope.$emit('igiItem.loaded', scope.image);
+    });
 }
