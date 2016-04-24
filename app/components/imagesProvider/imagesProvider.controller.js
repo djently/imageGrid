@@ -61,8 +61,11 @@ class ImagesProviderController {
     }
 
     removeImage(img) {
-        this.images.splice(this.images.indexOf(img), 1);
-        this.loadedImagesCounter();
+        let imgIndex = this.images.indexOf(img);
+        if (~imgIndex < 0) {
+            this.images.splice(imgIndex, 1);
+            this.loadedImagesCounter();
+        }
     }
 
     loadedImagesCounter() {
