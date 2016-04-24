@@ -15,10 +15,10 @@ class ImagesGridController {
             this.placeImages();
         })
 
-        $window.onresize = () => {
+        $window.onresize = debounce(() => {
             this.placeImages();
             $scope.$digest();
-        }
+        }, 100, {trailing: true});
     }
 
     placeImages() {

@@ -51,10 +51,9 @@ class ImagesProviderController {
 
     scrollHandler() {
         if (this.loadedImages < this.images.length) return;
-        const $ipMain = $(this.$element.children()),
-            $ipContainer = $(this.$element).find('.ip-container'),
-            scrollPosition = $ipContainer.scrollTop() + $ipContainer.height(),
-            gridHeight = $ipContainer.children().height()
+        const $ipContainer = $(this.$element).find('.ip-container'),
+              scrollPosition = $ipContainer.scrollTop() + $ipContainer.height(),
+              gridHeight = $ipContainer.children().height()
 
         if (scrollPosition > gridHeight - 100) {
             this.loadImages();
