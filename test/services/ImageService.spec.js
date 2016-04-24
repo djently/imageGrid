@@ -1,36 +1,83 @@
-import chai from 'chai'
-import spies from 'chai-spies'
-import path from 'path'
+import '../../app/';
 
 let expect = chai.expect;
-chai.use(spies);
+let {module, inject} = angular.mock;
 
-let ImagesService = require(path.join(process.cwd(), 'app/services/ImagesService.js')).default;
+let imagesMock = [
+    {url: 'testurl1.jpg', name: 'img1'},
+    {url: 'testurl2.jpg', name: 'img2'},
+    {url: 'testurl3.jpg', name: 'img3'},
+    {url: 'testurl4.jpg', name: 'img4'},
+    {url: 'testurl5.jpg', name: 'img5'},
+    {url: 'testurl6.jpg', name: 'img6'},
+    {url: 'testurl7.jpg', name: 'img7'},
+    {url: 'testurl8.jpg', name: 'img8'},
+    {url: 'testurl9.jpg', name: 'img9'},
+    {url: 'testurl10.jpg', name: 'img10'}
+];
 
-// mocks
-let response = { data: [] },
-    $http = {
-        get: function(endpoint, opts) {
-            return {
-                then: function(successCb, errorCb) {
-                    successCb(response);
-                }
-            }
-        }
-    },
-    ENDPOINTS = {
-        imagesSource: 'testendpoint'
-    };
+describe('imageGrid', () => {
+    let ImagesService,
+        $httpBackend,
+        ENDPOINTS;
 
-describe('ImageService', function() {
-    let imageService = new ImagesService($http, ENDPOINTS);
+    beforeEach(module('imageGrid'));
+    beforeEach(inject((_$httpBackend_, _ImagesService_, _ENDPOINTS_) => {
+        ImagesService = _ImagesService_;
+        $httpBackend = _$httpBackend_;
+        ENDPOINTS = _ENDPOINTS_;
+    }))
 
-    describe('#getImages', function() {
-        it('should make get request to imagesSource endpoint', function() {
-            $http.get = chai.spy('get', $http.get);
-            imageService.getImages();
+    describe('ImagesService', () => {
+        it('should be defined', () => {
+            expect(ImagesService).not.to.be.undefined;
+            expect(ImagesService).to.have.property('getImages');
+        });
 
-            expect($http.get).to.have.been.called();
-        })
-    })
-})
+        describe('#getImages', function() {
+            beforeEach(function() {
+                $httpBackend.expectGET(ENDPOINTS.imagesSource)
+                    .respond(200, {images: imagesMock});
+            });
+
+
+            afterEach(function() {
+                $httpBackend.flush();
+            });
+
+            it('should return promise with "then"', () => {
+                expect(ImagesService.getImages()).to.have.property('then');
+            });
+
+            it('should return array of images inside promise', () => {
+                ImagesService.getImages().then((images) => {
+                    expect(images).to.be.instanceof(Array);
+                });
+            });
+
+            it('should return limited number of entries', () => {
+                const entriesLimit = 3;
+                ImagesService.getImages(0, entriesLimit).then((images) => {
+                    expect(images.length).to.equal(entriesLimit)
+                });
+            })
+
+            it('should entries with correct offset', () => {
+                const offset = 5,
+                      entriesLimit = 3;
+                ImagesService.getImages(offset, entriesLimit).then((images) => {
+                    expect(images.length).to.equal(entriesLimit);
+                    expect(images).to.deep.eql(
+                        imagesMock.slice(offset, offset + entriesLimit)
+                    );
+                });
+            });
+
+            it('should return empty array if offset exceeds respond length', () => {
+                ImagesService.getImages(imagesMock.length + 1).then((images) => {
+                    expect(images).to.be.empty;
+                });
+            })
+        });
+    });
+});

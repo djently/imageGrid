@@ -98,3 +98,9 @@ if (TARGET === 'build') {
         ]
     });
 }
+
+if (TARGET === 'test') {
+    module.exports = merge(common, {
+        devtool: 'inline-source-map'
+    });
+}
