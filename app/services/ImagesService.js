@@ -1,8 +1,8 @@
 var _ = {};
 
 class ImagesService {
-    constructor($http, ENDPOINTS) {
-        _ = { $http, ENDPOINTS };
+    constructor($http, $log, ENDPOINTS) {
+        _ = { $http, ENDPOINTS, $log };
     }
 
     getImages(offset, count) {
@@ -13,7 +13,7 @@ class ImagesService {
     }
 }
 
-ImagesService.$inject = ['$http', 'ENDPOINTS']
+ImagesService.$inject = ['$http', '$log', 'ENDPOINTS']
 
 export default ImagesService;
 
@@ -25,5 +25,5 @@ function onImagesRequestSuccess(offset = 0, count = 0, res) {
 }
 
 function onImagesRequestError(res) {
-    console.error('Error loading images', res);
+    _.$log.error('Error loading images', res);
 }

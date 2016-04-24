@@ -7,9 +7,11 @@
     "webpack": "node_modules/.bin/webpack",
     "webpack-dev-server": "node_modules/.bin/webpack-dev-server",
     "mocha": "node_modules/.bin/mocha",
-    "karma": "node_modules/.bin/karma"
+    "karma": "node_modules/.bin/karma",
+    "lint": "node_modules/.bin/eslint"
   },
   "scripts": {
+    "lint": "eslint app/**/*.js test/**/*.js -c .eslintrc",
     "start": "webpack-dev-server",
     "build": "webpack",
     "test": "karma start"
