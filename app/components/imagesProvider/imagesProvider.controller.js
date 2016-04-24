@@ -21,7 +21,10 @@ class ImagesProviderController {
 
         $scope.$on(
             'igiItem.loaded',
-            debounce(this.loadedImagesCounter.bind(this), 250)
+            debounce(() => {
+                this.loadedImagesCounter();
+                $scope.$digest();
+            }, 100)
         );
     }
 
@@ -60,19 +63,10 @@ class ImagesProviderController {
         }
     }
 
-    removeImage(img) {
-        let imgIndex = this.images.indexOf(img);
-        if (~imgIndex < 0) {
-            this.images.splice(imgIndex, 1);
-            this.loadedImagesCounter();
-        }
-    }
-
     loadedImagesCounter() {
         this.loadedImages = this.images.reduce((counter, image) => {
             return image.loaded ? ++counter : counter;
         }, 0);
-        this.$scope.$digest();
         this.scrollHandler();
     }
 }

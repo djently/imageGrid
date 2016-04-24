@@ -7,7 +7,8 @@ function imagesGridDirective() {
         scope: {
             width: '@',
             padding: '@',
-            images: '='
+            images: '=',
+            onRemove: '&'
         },
         bindToController: true,
         templateUrl: '/templates/imagesGrid/imagesGrid.html',

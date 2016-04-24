@@ -2,7 +2,12 @@
     <header class="ip-header md-headline">Images Grid</header>
 
     <div class="ip-container" ng-show="ip.images.length > 0">
-        <images-grid width="300" padding="10" images="ip.images"></images-grid>
+        <images-grid
+            width="300"
+            padding="10"
+            images="ip.images"
+            on-remove="ip.loadedImagesCounter()"
+        ></images-grid>
     </div>
 
     <div layout="column" layout-align="center center"

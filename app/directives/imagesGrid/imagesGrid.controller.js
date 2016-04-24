@@ -46,9 +46,13 @@ class ImagesGridController {
         this.columnWidth = 100 / columnsCount + '%';
     }
 
-    removeImage(image, $event) {
-        this.images.splice(this.images.indexOf(image), 1);
-        $event.target.remove();
+    removeImage(image) {
+        var imageIndex = this.images.indexOf(image);
+        if (imageIndex >= 0) {
+            this.onRemove();
+            this.images.splice(imageIndex, 1);
+            this.placeImages();
+        }
     }
 }
 
