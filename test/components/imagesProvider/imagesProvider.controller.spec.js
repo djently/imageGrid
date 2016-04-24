@@ -54,7 +54,7 @@ describe('imageGrid', () => {
                 IPController.loadImages();
                 expect(IPController.ImagesServiceOffset)
                     .to.be.above(prevImagesServiceOffset);
-            })
+            });
 
             it('should call ImagesService#getImages', inject((ImagesService) => {
                 ImagesService.getImages = chai.spy(ImagesService.getImages);
@@ -71,8 +71,8 @@ describe('imageGrid', () => {
                         .to.equal(previousItemsCount + 1);
 
                     varImagesMock = imagesMock;
-                })
-            })
+                });
+            });
 
             it('should broadcast "ig.imagesUpdated"', inject(($timeout) => {
                 let eventHandler = chai.spy(angular.noop);
@@ -83,21 +83,6 @@ describe('imageGrid', () => {
 
                 expect(eventHandler).to.have.been.called();
             }));
-        })
-
-        describe('#removeImage', () => {
-            it('should remove existing image entry', () => {
-                let prevImagesCount = IPController.images.length;
-                IPController.removeImage(IPController.images[0]);
-                expect(IPController.images.length)
-                    .to.be.equal(prevImagesCount - 1);
-            })
-
-            it('shouldn\'t remove image if it not exists', () => {
-                let prevImagesCount = IPController.images.length;
-                IPController.removeImage({url: 'not_exists'});
-                expect(IPController.images.length).to.be.equal(prevImagesCount);
-            });
         });
 
         describe('#loadedImagesCounter', () => {
@@ -112,12 +97,6 @@ describe('imageGrid', () => {
                 IPController.loadedImagesCounter();
                 expect(IPController.loadedImages).to.equal(3);
             })
-
-            it('should run digest', () => {
-                $scope.$digest = chai.spy($scope.$digest);
-                IPController.loadedImagesCounter();
-                expect($scope.$digest).to.have.been.called();
-            });
         })
     });
 });
